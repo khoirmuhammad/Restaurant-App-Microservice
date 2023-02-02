@@ -1,0 +1,69 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7151"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/Food/GetAll",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Food/GetAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/Food/GetByCategory?categoryCode={categoryCode}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Food/GetByCategory?categoryCode={categoryCode}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/Food/GetById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Food/GetById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/Food/Save",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Food/Save",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/Food/SoftDelete?id={id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamPathTemplate": "/api/Food/SoftDelete?id={id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    }
+
+
+  ]
+}
