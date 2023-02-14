@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Net.Mail;
+//using Plain.RabbitMQ;
+using Newtonsoft.Json;
+using MessageBrokerLibrary;
 
 namespace FoodService.Controllers
 {
@@ -13,9 +16,11 @@ namespace FoodService.Controllers
     public class FoodController : ControllerBase
     {
         private readonly IFoodRepository _foodRepository;
-        public FoodController(IFoodRepository foodRepository)
+        private readonly IPublisher _publisher;
+        public FoodController(IFoodRepository foodRepository, IPublisher publisher)
         {
             _foodRepository = foodRepository;
+            _publisher = publisher;
         }
 
         [HttpGet("GetAll")]
@@ -77,6 +82,8 @@ namespace FoodService.Controllers
 
             if (string.IsNullOrEmpty(model.Id))
             {
+                _publisher.Publish(JsonConvert.SerializeObject(food), "order.food", null);
+
                 return StatusCode(201);
             }
             else

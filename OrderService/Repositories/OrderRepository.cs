@@ -6,25 +6,25 @@ namespace OrderService.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly ApplicationContext _contex;
+        private readonly ApplicationContext _context;
 
         public OrderRepository(ApplicationContext context)
         {
-            _contex = context;
+            _context = context;
         }
         public async Task<IEnumerable<Order>> GetAll()
         {
-            return await _contex.Orders.AsNoTracking().ToListAsync();
+            return await _context.Orders.AsNoTracking().ToListAsync();
         }
 
         public async Task<Order?> GetOrderById(Guid id)
         {
-            return await _contex.Orders.SingleOrDefaultAsync(s => s.Id == id);
+            return await _context.Orders.SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Order>> GetOrderHistoryByUser(Guid userId)
         {
-            return await _contex.Orders.Where(w => w.UserId.Equals(userId)).AsNoTracking().ToListAsync();
+            return await _context.Orders.Where(w => w.UserId.Equals(userId)).AsNoTracking().ToListAsync();
         }
 
         public async Task Save(Order order)
@@ -33,11 +33,11 @@ namespace OrderService.Repositories
 
             if (data == null)
             {
-                await _contex.Orders.AddAsync(order);
+                await _context.Orders.AddAsync(order);
             }
             else
             {
-                _contex.Orders.Update(data);
+                _context.Orders.Update(data);
             }
         }
 

@@ -13,9 +13,14 @@ namespace OrderService.Repositories
         public IOrderDetailRepository OrderDetailRepository => new OrderDetailRepository(_context);
         public IFoodViewModelRepository FoodViewModelRepository => new FoodViewModelRepository(_context);
 
-        public async Task<bool> SaveAsync()
+        public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() > 0;
         }
     }
 }

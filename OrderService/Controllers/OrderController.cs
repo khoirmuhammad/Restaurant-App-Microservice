@@ -50,7 +50,7 @@ namespace OrderService.Controllers
             await _service.OrderRepository.Save(order);
             await _service.OrderDetailRepository.SaveBulk(orderDetail);
 
-            bool result = await _service.SaveAsync();
+            bool result = await _service.SaveChangesAsync();
 
             if (result)
             {
@@ -83,7 +83,7 @@ namespace OrderService.Controllers
             order.Status = status;
             await _service.OrderRepository.UpdateStatus(order);
 
-            bool result = await _service.SaveAsync();
+            bool result = await _service.SaveChangesAsync();
 
             if (result)
             {

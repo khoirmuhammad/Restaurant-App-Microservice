@@ -2,6 +2,9 @@ using FoodService.Data;
 using FoodService.Extensions;
 using FoodService.Repositories;
 using Microsoft.Extensions.Options;
+//using Plain.RabbitMQ;
+using RabbitMQ.Client;
+using MessageBrokerLibrary;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,10 @@ builder.Services.AddSingleton<IDatabaseSettings>(provider =>
 builder.Services.AddScoped<IFoodCategoryRepository, FoodCategoryRepository>();
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 
+builder.Services.AddSingleton<IConnectionProvider>(new ConnectionProvider("amqp://guest:guest@localhost:5672"));
+builder.Services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(),
+    "order-exchange",
+    ExchangeType.Topic));
 
 
 builder.Services.AddControllers();
